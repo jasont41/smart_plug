@@ -1,0 +1,6 @@
+syntax = "proto3";
+message PowerMsg {
+    string name = 1; 
+    int32 current_power_consumption = 2; 
+    int32 timestamp = 3; 
+}

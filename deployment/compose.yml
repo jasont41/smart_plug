@@ -1,0 +1,14 @@
+version: "3.6"
+services: 
+  metrics: 
+    container_name: metrics
+    image: metrics:latest 
+    ports: 
+      - "25000"
+  proxy: 
+    container_name: proxy
+    image: proxy:latest
+    ports: 
+      - "25000"
+    env_file:
+      - .env
