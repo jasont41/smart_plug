@@ -10,9 +10,9 @@ Gathers IP addresses of smart plugs on the network
 '''
 def get_device_ips():
     ips = []
+    
     with open("/home/python_src/ips.txt") as f: 
-        for line in f: 
-            ips.append(line)
+        ips = [line.rstrip('\n') for line in f]
     return ips
 
 '''
@@ -41,6 +41,8 @@ def get_realtime_consumption(plugs):
             #   I only care about wattage, it is power after all
             power_msg.current_power_consumption = int(plug[1].emeter_realtime['power_mw']/ 1000)
             power_msg.timestamp = int(time.time())
+            print("Sending this message")
+            print(power_msg)
             send_msg(power_msg)
             time.sleep(0.25)
             
@@ -63,6 +65,7 @@ def create_objs(devices):
 
 def main():
     device_ips = get_device_ips()
+    print(device_ips)
     if len(device_ips) == 0: 
         print("no devices, exiting")
         sys.exit()
